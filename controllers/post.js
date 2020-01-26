@@ -21,10 +21,11 @@ const createPost = async (req, res) => {
   }
 };
 /* 
-  Can also create different apis to get latest and top posts
   If query params new set to true it will send latest posts
   If query params top set to true it will send posts with more number of views
   Also provides pagination so that user can get 10 post at a time
+
+  Can also create different apis to get latest and top posts
 */
 const getPosts = async (req, res, next) => {
   let skip = req.query.skip ? parseInt(req.query.skip) : 0;
@@ -32,12 +33,6 @@ const getPosts = async (req, res, next) => {
 
   try {
     let posts;
-    if (req.query.new && req.query.top) {
-      posts = await Post.find({}, {}, { skip, limit }).sort({
-        createdAt: -1,
-        views: -1
-      });
-    }
     if (req.query.new) {
       posts = await Post.find({}, {}, { skip, limit }).sort({
         createdAt: -1

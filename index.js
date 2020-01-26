@@ -1,10 +1,11 @@
 const express = require('express'),
   bodyParser = require('body-parser'),
-  mongoose = require('mongoose')
+  mongoose = require('mongoose');
 
-const settings = require('./config')
-let authRoutes = require('./routes/auth');
-let postRoutes = require('./routes/post');
+const settings = require('./config');
+
+const authRoutes = require('./routes/auth'),
+  postRoutes = require('./routes/post');
 
 let app = express();
 app.listen(3000, () => {
