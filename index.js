@@ -13,7 +13,7 @@ app.listen(3000, () => {
 });
 function configure() {
   app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: false, limit: 50000000 }));
+  app.use(bodyParser.urlencoded({ extended: false }));
 
   configureRouters();
 }

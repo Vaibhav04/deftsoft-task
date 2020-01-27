@@ -19,7 +19,7 @@ router.get('/', [helper.authenticateUser, controller.getPosts]);
  * @returns: {Status} 200|401|500
  */
 
-router.get('/new', [helper.authenticateUser, controller.getNewPosts]);
+// router.get('/new', [helper.authenticateUser, controller.getNewPosts]);
 
 /***
  * GET /posts/top
@@ -28,7 +28,7 @@ router.get('/new', [helper.authenticateUser, controller.getNewPosts]);
  * @returns: {Status} 200|401|500
  */
 
-router.get('/top', [helper.authenticateUser, controller.getTopPosts]);
+// router.get('/top', [helper.authenticateUser, controller.getTopPosts]);
 
 /***
  * GET /posts/:postId

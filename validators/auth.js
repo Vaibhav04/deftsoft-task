@@ -4,6 +4,7 @@ const validateRegisterInput = [
   check('email', 'Email is required')
     .not()
     .isEmpty(),
+  check('email', 'Email is not valid').isEmail(),
   check(
     'password',
     'Please enter a password with 6 or more characters'
@@ -16,6 +17,7 @@ const validateLoginInput = [
   check('email', 'Email is required')
     .not()
     .isEmpty(),
+  check('email', 'Email is not valid').isEmail(),
   check('password', 'Password is required')
     .not()
     .isEmpty()
@@ -24,13 +26,15 @@ const validateLoginInput = [
 const validateForgetPasswordInput = [
   check('email', 'Email is required')
     .not()
-    .isEmpty()
+    .isEmpty(),
+  check('email', 'Email is not valid').isEmail()
 ];
 
 const validateResetPasswordInput = [
   check('email', 'Email is required')
     .not()
     .isEmpty(),
+  check('email', 'Email is not valid').isEmail(),
   check('token', 'Token is required')
     .not()
     .isEmpty(),

@@ -78,7 +78,8 @@ const login = async (req, res) => {
  * 3. If user is not found it returns error message
  * 4. If user is found it will send a token on registered email
  * 5. After clicking on that link user will be redirected to fronend app with the token in query params
- * 6  Here he need to enter his email and new password
+ * 6  Here he need to enter his email and new password 
+ * (for now copy token from the url and make a call to reset password passing email, token and new password in body)
  */
 const forgetPassword = (req, res, next) => {
   const errors = validationResult(req);
@@ -144,6 +145,10 @@ const forgetPassword = (req, res, next) => {
  * 4. Otherwise user will be requested to genrate a new token
  */
 function resetPassword(req, res, next) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
   const { email, token, password } = req.body;
   User.findOne({ email })
     .exec()

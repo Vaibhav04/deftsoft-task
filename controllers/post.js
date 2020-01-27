@@ -21,8 +21,8 @@ const createPost = async (req, res) => {
   }
 };
 /* 
-  If query params new set to true it will send latest posts
-  If query params top set to true it will send posts with more number of views
+  If query params orderType set to 1 it will send latest posts
+  If query params orderType set to 2 it will send posts with more number of views
   Also provides pagination so that user can get 10 post at a time
 
   Can also create different apis to get latest and top posts
@@ -33,11 +33,11 @@ const getPosts = async (req, res, next) => {
 
   try {
     let posts;
-    if (req.query.new) {
+    if (parseInt(req.query.orderType) === 1) {
       posts = await Post.find({}, {}, { skip, limit }).sort({
         createdAt: -1
       });
-    } else if (req.query.top) {
+    } else if (parseInt(req.query.orderType) === 2) {
       posts = await Post.find({}, {}, { skip, limit }).sort({
         views: -1
       });
@@ -54,41 +54,41 @@ const getPosts = async (req, res, next) => {
   }
 };
 
-const getNewPosts = async (req, res, next) => {
-  let skip = req.query.skip ? parseInt(req.query.skip) : 0;
-  let limit = req.query.limit ? parseInt(req.query.limit) : 10;
+// const getNewPosts = async (req, res, next) => {
+//   let skip = req.query.skip ? parseInt(req.query.skip) : 0;
+//   let limit = req.query.limit ? parseInt(req.query.limit) : 10;
 
-  try {
-    const posts = await Post.find({}, {}, { skip, limit }).sort({
-      createdAt: -1
-    });
+//   try {
+//     const posts = await Post.find({}, {}, { skip, limit }).sort({
+//       createdAt: -1
+//     });
 
-    if (!posts) {
-      return res.status(400).json({ errors: [{ msg: 'No posts found' }] });
-    }
-    return res.status(200).json(posts);
-  } catch (err) {
-    return res.status(500).send('Server error');
-  }
-};
+//     if (!posts) {
+//       return res.status(400).json({ errors: [{ msg: 'No posts found' }] });
+//     }
+//     return res.status(200).json(posts);
+//   } catch (err) {
+//     return res.status(500).send('Server error');
+//   }
+// };
 
-const getTopPosts = async (req, res, next) => {
-  let skip = req.query.skip ? parseInt(req.query.skip) : 0;
-  let limit = req.query.limit ? parseInt(req.query.limit) : 10;
+// const getTopPosts = async (req, res, next) => {
+//   let skip = req.query.skip ? parseInt(req.query.skip) : 0;
+//   let limit = req.query.limit ? parseInt(req.query.limit) : 10;
 
-  try {
-    const posts = await Post.find({}, {}, { skip, limit }).sort({
-      views: -1
-    });
+//   try {
+//     const posts = await Post.find({}, {}, { skip, limit }).sort({
+//       views: -1
+//     });
 
-    if (!posts) {
-      return res.status(400).json({ errors: [{ msg: 'No posts found' }] });
-    }
-    return res.status(200).json(posts);
-  } catch (err) {
-    return res.status(500).send('Server error');
-  }
-};
+//     if (!posts) {
+//       return res.status(400).json({ errors: [{ msg: 'No posts found' }] });
+//     }
+//     return res.status(200).json(posts);
+//   } catch (err) {
+//     return res.status(500).send('Server error');
+//   }
+// };
 
 const getPost = async (req, res, next) => {
   try {
@@ -109,7 +109,7 @@ const getPost = async (req, res, next) => {
 module.exports = {
   createPost,
   getPosts,
-  getNewPosts,
-  getTopPosts,
+  // getNewPosts,
+  // getTopPosts,
   getPost
 };

@@ -3,8 +3,8 @@ module.exports = {
   secretKey: 'mySecret',
   database: 'mongodb://localhost:27017/deftsoft-post',
   // Enter your gmail email id and password
-  email: "your email",
-  pass: "your password",
-  frontendUrl: "front end url of application"
+  email: "gmail email",
+  pass: "gmail password",
+  frontendUrl: "http://localhost:4200"
 };
  
